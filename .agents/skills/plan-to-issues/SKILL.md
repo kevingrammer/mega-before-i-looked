@@ -14,8 +14,8 @@ in a shell this agent can run.
 2. Draft the split as a table: title · plan section · scope · done when · blocked by.
    One issue per unit of work.
 3. **Stop and show the table to the human.** Publish nothing until they approve it.
-4. Ask the human what every issue here must carry (fields, labels, wording), unless it is
-   already written down in this session or in the repo.
+4. Every issue carries the shape in "Issue shape" below. Ask the human only if this plan
+   needs something it doesn't cover.
 5. Create each issue in dependency order, so blocked-by can cite real numbers:
 
    ```sh
@@ -29,6 +29,22 @@ Closing one, with the closing comment from AGENTS.md:
 ```sh
 gh issue close <n> -c "<closing comment>"
 ```
+
+## Issue shape
+
+Approved by the repo owner on 2026-10-29 for plan morning-digest. Every issue:
+
+- **Body opens with** `Source: plan.md § <n>`, the plan's own section id (`§ 1`, `§ 2a`).
+- **Label** `plan:<plan>`, the `plan:` field of plan.md's frontmatter (e.g. `plan:morning-digest`).
+- **Sections, in order:** `## Scope` (bullets, the boundary only), `## Done when` (the plan's
+  line, word for word), `## Blocked by` (real issue numbers, or `—`).
+- **Last line:** `Close with the comment format in AGENTS.md (done / worker / commit).`
+
+A step that waits on someone outside the repo (a reviewer, a host) stays open until they confirm,
+and blocks every issue that undoes it.
+
+Commit messages say `closes #n` only when no closing comment is still owed: GitHub closes the
+issue on push, before the comment.
 
 ## No `gh`
 
